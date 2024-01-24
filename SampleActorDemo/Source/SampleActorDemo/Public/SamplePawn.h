@@ -28,9 +28,23 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	class UCameraComponent* CameraComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	class USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bullet")
+	class TSubclassOf<class ABullet> BulletClass;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Bullet")
+	float BulletSpawnOffset = 100.0f;
+	
 	//Input functions
 	void MoveForward(float Value);
 	void MoveRight(float Value);
+	void Turn(float value);
+	void LookUp(float value);
+	void Fire();
+
+
 
 public:	
 	// Called every frame

@@ -5,6 +5,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Bullet.h"
 
 // Sets default values
 ASamplePawn::ASamplePawn()
@@ -17,11 +19,17 @@ ASamplePawn::ASamplePawn()
 
 	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>("FloatingPawnMovement");
 
+	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
+	SpringArmComponent->SetupAttachment(GetRootComponent());
+	SpringArmComponent->TargetArmLength = 500.0f;
+	SpringArmComponent->TargetOffset = FVector(0.0f, 0.0f, 100.0f);
+
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>("CameraComponent");
-	CameraComponent->SetupAttachment(GetRootComponent());
-	CameraComponent->SetRelativeLocation(FVector(-500.0f, 0.0f, 500.0f));
-	CameraComponent->SetRelativeRotation(FRotator(-45.0f, 0.0f, 0.0f));
+	CameraComponent->SetupAttachment(SpringArmComponent);
 	
+
+	bUseControllerRotationYaw = true;
+	bUseControllerRotationPitch = true;
 }
 
 // Called when the game starts or when spawned
@@ -41,6 +49,38 @@ void ASamplePawn::MoveRight(float Value)
 	FloatingPawnMovement->AddInputVector(GetActorRightVector() * Value);
 }
 
+void ASamplePawn::Turn(float value)
+{
+	AddControllerYawInput(value);
+}
+
+void ASamplePawn::LookUp(float value)
+{
+	AddControllerPitchInput(value);
+}
+
+void ASamplePawn::Fire()
+{
+	if(!BulletClass) return; //if no bullet class is set, return
+
+	//spawn bullet
+	FActorSpawnParameters SpawnParameters;
+	SpawnParameters.Owner = this;
+	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+	SpawnParameters.Instigator = this;
+	SpawnParameters.bNoFail = true;
+
+	FTransform SpawnTransform;
+	SpawnTransform.SetLocation(GetActorLocation() + GetActorForwardVector() * BulletSpawnOffset);
+	SpawnTransform.SetRotation(GetActorRotation().Quaternion());
+	
+	
+	
+	ABullet* Bullet = GetWorld()->SpawnActor<ABullet>(BulletClass, SpawnTransform, SpawnParameters);
+	
+	
+}
+
 // Called every frame
 void ASamplePawn::Tick(float DeltaTime)
 {
@@ -53,7 +93,10 @@ void ASamplePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("MoveForward"),this,&ASamplePawn::MoveForward);
-	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ASamplePawn::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward",this,&ASamplePawn::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ASamplePawn::MoveRight);
+	PlayerInputComponent->BindAxis("Turn",this, &ASamplePawn::Turn);
+	PlayerInputComponent->BindAxis("LookUp", this, &ASamplePawn::LookUp);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASamplePawn::Fire);
 }
 
