@@ -11,6 +11,12 @@ class ENDLESSRUNNERCPP_API ARunCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* Camera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* SpringArm;
+	
 public:
 	// Sets default values for this character's properties
 	ARunCharacter();
@@ -19,18 +25,16 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	class UCameraComponent* Camera;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-	class USpringArmComponent* SpringArm;
+	
 	
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+public:
+	/** Returns CameraBoom subobject **/
+	FORCEINLINE class USpringArmComponent* GetSpringArm() const { return SpringArm; }
+	/** Returns FollowCamera subobject **/
+	FORCEINLINE class UCameraComponent* GetCamera() const { return Camera; }
 };
