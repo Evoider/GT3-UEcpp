@@ -1,10 +1,10 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "EndlessRunnerCppGameMode.h"
-#include "EndlessRunnerCppCharacter.h"
+#include "EndlessRunnercppGameMode.h"
+#include "EndlessRunnercppCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
-AEndlessRunnerCppGameMode::AEndlessRunnerCppGameMode()
+AEndlessRunnercppGameMode::AEndlessRunnercppGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter"));

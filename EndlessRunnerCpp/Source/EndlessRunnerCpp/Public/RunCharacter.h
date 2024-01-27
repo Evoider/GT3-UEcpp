@@ -10,7 +10,6 @@ UCLASS()
 class ENDLESSRUNNERCPP_API ARunCharacter : public ACharacter
 {
 	GENERATED_BODY()
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 

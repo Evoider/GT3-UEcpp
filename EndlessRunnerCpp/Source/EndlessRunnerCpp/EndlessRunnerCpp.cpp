@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "EndlessRunnerCpp.h"
+#include "EndlessRunnercpp.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, EndlessRunnerCpp, "EndlessRunnerCpp" );
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, EndlessRunnercpp, "EndlessRunnercpp" );
  

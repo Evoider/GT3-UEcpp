@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "EndlessRunnerCppCharacter.h"
+#include "EndlessRunnercppCharacter.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -14,9 +14,9 @@
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
-// AEndlessRunnerCppCharacter
+// AEndlessRunnercppCharacter
 
-AEndlessRunnerCppCharacter::AEndlessRunnerCppCharacter()
+AEndlessRunnercppCharacter::AEndlessRunnercppCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -54,7 +54,7 @@ AEndlessRunnerCppCharacter::AEndlessRunnerCppCharacter()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-void AEndlessRunnerCppCharacter::BeginPlay()
+void AEndlessRunnercppCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
@@ -72,7 +72,7 @@ void AEndlessRunnerCppCharacter::BeginPlay()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void AEndlessRunnerCppCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AEndlessRunnercppCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
@@ -82,10 +82,10 @@ void AEndlessRunnerCppCharacter::SetupPlayerInputComponent(UInputComponent* Play
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AEndlessRunnerCppCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AEndlessRunnercppCharacter::Move);
 
 		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AEndlessRunnerCppCharacter::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AEndlessRunnercppCharacter::Look);
 	}
 	else
 	{
@@ -93,7 +93,7 @@ void AEndlessRunnerCppCharacter::SetupPlayerInputComponent(UInputComponent* Play
 	}
 }
 
-void AEndlessRunnerCppCharacter::Move(const FInputActionValue& Value)
+void AEndlessRunnercppCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -116,7 +116,7 @@ void AEndlessRunnerCppCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-void AEndlessRunnerCppCharacter::Look(const FInputActionValue& Value)
+void AEndlessRunnercppCharacter::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();

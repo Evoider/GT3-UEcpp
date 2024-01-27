@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "RunCharacterController.generated.h"
 
+struct FInputActionValue;
 /**
  * 
  */
@@ -15,7 +16,7 @@ class ENDLESSRUNNERCPP_API ARunCharacterController : public APlayerController
 	GENERATED_BODY()
 protected:
 	
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Player")
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category = "Player")
 	class ARunCharacter* RunCharacter;
 
 	/** MappingContext */
@@ -26,6 +27,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Player")
+	bool bCanMove = true;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -33,9 +36,8 @@ protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
-			
+	virtual void Tick(float DeltaSeconds) override;
 
 protected:
 	virtual void SetupInputComponent() override;
-	
 };

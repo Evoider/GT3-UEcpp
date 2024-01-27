@@ -4,15 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "EndlessRunnerCppGameMode.generated.h"
+#include "EndlessRunnercppGameMode.generated.h"
 
 UCLASS(minimalapi)
-class AEndlessRunnerCppGameMode : public AGameModeBase
+class AEndlessRunnercppGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
 public:
-	AEndlessRunnerCppGameMode();
+	AEndlessRunnercppGameMode();
 };
 
 

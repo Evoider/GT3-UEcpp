@@ -2,9 +2,9 @@
 
 using UnrealBuildTool;
 
-public class EndlessRunnerCpp : ModuleRules
+public class EndlessRunnercpp : ModuleRules
 {
-	public EndlessRunnerCpp(ReadOnlyTargetRules Target) : base(Target)
+	public EndlessRunnercpp(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 

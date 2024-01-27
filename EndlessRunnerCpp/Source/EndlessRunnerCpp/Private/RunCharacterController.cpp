@@ -32,13 +32,27 @@ void ARunCharacterController::BeginPlay()
 
 void ARunCharacterController::Move(const FInputActionValue& Value)
 {
-	 FVector2D MovementVector = Value.Get<FVector2D>();
+	FVector2D MovementVector = Value.Get<FVector2D>();
 
 
-	 FVector RightVector = RunCharacter->GetActorRightVector();
+	FVector RightVector = RunCharacter->GetActorRightVector();
 	
 	RunCharacter->AddMovementInput(RightVector, MovementVector.X);
 
+}
+
+void ARunCharacterController::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	if(bCanMove)
+	{
+		if(RunCharacter)
+		{
+			FVector RightVector = RunCharacter->GetActorRightVector();
+			RunCharacter->AddMovementInput(RightVector, 1.0f);
+		}
+	}
 }
 
 void ARunCharacterController::SetupInputComponent()
@@ -59,4 +73,3 @@ void ARunCharacterController::SetupInputComponent()
 
 	
 }
-
