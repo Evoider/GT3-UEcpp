@@ -19,9 +19,21 @@ protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = "GameMode")
 	class ARunCharacter* RunCharacter;
 
-	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GameMode")
+	class ATile* LastTile;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "GameMode")
+	TSubclassOf<class ATile> TileClass;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "GameMode")
+	int32 NumberOfStartingTiles;
+
+	UFUNCTION()
+	void OnPlayerDeath(ARunCharacter* DeadActor);
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable,Category = "GameMode")
-	void SpawnNextTile();
+	void DestroyExitedTile(ATile* ExitedTile);
+	UFUNCTION(BlueprintCallable,Category = "GameMode")
+	void SpawnNextTile(ATile* PreviousTile);
 };

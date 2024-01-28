@@ -31,6 +31,7 @@ protected:
 	bool bCanMove = true;
 	
 protected:
+	
 	virtual void BeginPlay() override;
 	
 	/** Called for movement input */
@@ -38,6 +39,11 @@ protected:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	
 protected:
 	virtual void SetupInputComponent() override;
+
+public:
+	UFUNCTION()
+	void Die(ARunCharacter* DeadActor);
 };

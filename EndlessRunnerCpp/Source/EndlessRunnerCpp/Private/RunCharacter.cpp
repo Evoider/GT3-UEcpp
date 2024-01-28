@@ -4,6 +4,12 @@
 #include "RunCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "RunCharacterController.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
+#include "Particles/ParticleSystemComponent.h"
+
 
 // Sets default values
 ARunCharacter::ARunCharacter()
@@ -19,6 +25,8 @@ ARunCharacter::ARunCharacter()
 
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm);
+
+	RunCharacterController = Cast<ARunCharacterController>(GetController());
 	
 }
 
@@ -27,6 +35,30 @@ void ARunCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void ARunCharacter::Die()
+{
+	if (!bIsDead)
+	{
+		bIsDead = true;
+		UE_LOG(LogTemp, Warning, TEXT("Dead"));
+		USkeletalMeshComponent* MeshComp = GetMesh();
+		MeshComp->SetSimulatePhysics(true);
+		MeshComp->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		MeshComp->AddImpulse(FVector(10000.0f, 0.0f, 50000.0f));
+
+		UParticleSystemComponent* ParticleComp = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathParticle, GetActorLocation());
+		ParticleComp->SetWorldScale3D(FVector(3.0f, 3.0f, 3.0f));
+
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), DeathSound, GetActorLocation());
+		
+		OnDeath.Broadcast(this);
+	}
+	else if (bIsDead)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Already Dead"));
+	}
 }
 
 // Called every frame

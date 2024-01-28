@@ -23,6 +23,7 @@ void ARunCharacterController::BeginPlay()
 		{
 			UE_LOG(LogTemp,Warning,TEXT("Subsystem is not valid"));
 		}
+		RunCharacter->OnDeath.AddDynamic(this,&ARunCharacterController::Die);
 	}
 	else
 	{
@@ -33,12 +34,9 @@ void ARunCharacterController::BeginPlay()
 void ARunCharacterController::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
-
-
 	FVector RightVector = RunCharacter->GetActorRightVector();
 	
 	RunCharacter->AddMovementInput(RightVector, MovementVector.X);
-
 }
 
 void ARunCharacterController::Tick(float DeltaSeconds)
@@ -49,11 +47,13 @@ void ARunCharacterController::Tick(float DeltaSeconds)
 	{
 		if(RunCharacter)
 		{
-			FVector RightVector = RunCharacter->GetActorRightVector();
-			RunCharacter->AddMovementInput(RightVector, 1.0f);
+			FVector FwdVector = RunCharacter->GetActorForwardVector();
+			RunCharacter->AddMovementInput(FwdVector, 1.0f);
 		}
 	}
 }
+
+
 
 void ARunCharacterController::SetupInputComponent()
 {
@@ -72,4 +72,10 @@ void ARunCharacterController::SetupInputComponent()
 	}
 
 	
+}
+
+void ARunCharacterController::Die(ARunCharacter* DeadActor)
+{
+	bCanMove = false;
+	DisableInput(this);
 }
