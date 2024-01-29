@@ -67,9 +67,10 @@ protected:
 
 	/** Called for firing input */
 	void Fire(const FInputActionValue& Value);
+	void StopFire(const FInputActionValue& InputActionValue);
+
 
 protected:
-	
 	virtual void SetupInputComponent() override;
 	
 };

@@ -53,6 +53,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	void Fire();
 
+	UFUNCTION(BlueprintCallable, Category = Weapon)
+	void StopFire();
+
+
+	UFUNCTION(BlueprintCallable, Category = Weapon)
 	USkeletalMeshComponent* GetMeshFP() const { return MeshFP; }
+	UFUNCTION(BlueprintCallable, Category = Weapon)
 	UCameraComponent* GetCameraFP() const { return CameraFP; }
+	UFUNCTION(BlueprintCallable, Category = Weapon)
+	UWeaponComponent* GetWeaponComponent() const { return WeaponComponent; }
 };

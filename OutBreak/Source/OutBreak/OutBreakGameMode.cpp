@@ -1,7 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "OutBreakGameMode.h"
-#include "OutBreakCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
 AOutBreakGameMode::AOutBreakGameMode()

@@ -3,21 +3,29 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "WeaponComponent.generated.h"
 
 class AHero;
 /**
  * 
  */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnFire);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnUnequip);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnEquip);
+
+
 UCLASS(Blueprintable, BlueprintType, ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class OUTBREAK_API UWeaponComponent : public UStaticMeshComponent
+class OUTBREAK_API UWeaponComponent : public USkeletalMeshComponent
 {
 	GENERATED_BODY()
 
 protected:
 
-	
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	FName WeaponName;
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
@@ -53,6 +61,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
 	int32 Ammo;
+
+	FTimerHandle FireTimer;
 	
 public:
 
@@ -69,6 +79,12 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category="Weapon")
+	void StopFire();
+
+	UFUNCTION(BlueprintCallable, Category="Weapon")
+	FName GetWeaponName() const { return WeaponName;}
+
+	UFUNCTION(BlueprintCallable, Category="Weapon")
 	int32 GetAmmo() const { return Ammo; }
 
 	UFUNCTION(BlueprintCallable, Category="Weapon")
@@ -77,6 +93,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	void AddAmmo(int32 Amount);
 
+	UFUNCTION(BlueprintCallable, Category="Weapon")
+	virtual void SpawnProjectile();
+
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+	FOnFire OnFire;
+
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+	FOnUnequip OnUnequip;
+
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+	FOnEquip OnEquip;
 private:
 	AHero* Hero;
 };

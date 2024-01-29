@@ -6,7 +6,6 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Hero.h"
-#include "OutBreak/OutBreakCharacter.h"
 
 void AHeroController::BeginPlay()
 {
@@ -69,6 +68,15 @@ void AHeroController::Fire(const FInputActionValue& Value)
 	}
 }
 
+void AHeroController::StopFire(const FInputActionValue& InputActionValue)
+{
+	if(!Hero) Hero = Cast<AHero>(GetPawn());
+	if(Hero->GetHasWeapon())
+	{
+		Hero->StopFire();
+	}
+}
+
 
 void AHeroController::SetupInputComponent()
 {
@@ -94,13 +102,8 @@ void AHeroController::SetupInputComponent()
 
 			// Fire
 			EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AHeroController::Fire);
+			EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AHeroController::StopFire);
 		}
-		else
-		{
-			UE_LOG(LogTemplateCharacter, Error,
-			       TEXT(
-				       "'%s' Failed to find an Enhanced Input Component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."
-			       ), *GetNameSafe(this));
-		}
+		
 	}
 }

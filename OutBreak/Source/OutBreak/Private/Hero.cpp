@@ -63,4 +63,10 @@ void AHero::Fire()
 	WeaponComponent->Fire();
 }
 
+void AHero::StopFire()
+{
+	if(!WeaponComponent) return;
+	WeaponComponent->StopFire();
+}
+
 
