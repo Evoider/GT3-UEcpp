@@ -11,28 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55026fbc-846d-4758-846f-33fdf2c187fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Actors/BP_Rock.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/Actors/BP_RunCharacter.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Obstacle.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/Obstacle.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EndlessRunnerCpp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EndlessRunnerCpp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Actors/BP_Tile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Actors/BP_Tile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Controllers/BP_RunCharacterController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Controllers/BP_RunCharacterController.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameMode/BP_RunGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameMode/BP_RunGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Levels/TestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Levels/TestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Ressources/StarterContent/Props/SM_Rock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Ressources/StarterContent/Props/SM_Rock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/EndlessRunnerCppCharacter.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/EndlessRunnerCppCharacter.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/EndlessRunnerCppGameMode.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/EndlessRunnerCppGameMode.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacterController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacterController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Tile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Tile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunGameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/Tile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/Tile.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/indexLayout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Actors/BP_Hero.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Controller/BP_PC_Hero.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Level/TempLevel.umap" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Private/HeroController.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Public/HeroController.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,6 +233,7 @@
       <workItem from="1706379848177" duration="5029000" />
       <workItem from="1706455017685" duration="14774000" />
       <workItem from="1706470316841" duration="3919000" />
+      <workItem from="1706540980120" duration="90000" />
     </task>
     <servers />
   </component>
