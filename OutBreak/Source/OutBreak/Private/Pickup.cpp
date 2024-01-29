@@ -10,6 +10,15 @@ UPickup::UPickup()
 {
 	RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovementComponent"));
 	SphereRadius = 32.f;
+
+	SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	SetCollisionProfileName("NoCollision");
+	SetCollisionResponseToAllChannels(ECR_Ignore);
+	SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	SetGenerateOverlapEvents(true);
+	SetCanEverAffectNavigation(false);
+	CanCharacterStepUpOn = ECB_No;
+	
 }
 
 void UPickup::BeginPlay()
