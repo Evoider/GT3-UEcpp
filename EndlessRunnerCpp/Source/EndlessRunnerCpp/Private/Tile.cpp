@@ -5,6 +5,7 @@
 #include "Components/ArrowComponent.h"
 #include "Components/BoxComponent.h"
 #include "Obstacle.h"
+#include "Pickup.h"
 #include "Kismet/KismetMathLibrary.h"
 
 
@@ -26,13 +27,17 @@ ATile::ATile()
 
 	ObstacleSpawnArea = CreateDefaultSubobject<UBoxComponent>("ObstacleSpawnArea");
 	ObstacleSpawnArea->SetupAttachment(RootComponent);
+
+	CoinSpawnArea = CreateDefaultSubobject<UBoxComponent>("CoinSpawnArea");
+	CoinSpawnArea->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
 void ATile::BeginPlay()
 {
 	Super::BeginPlay();
-	SpawnObstacle();
+	TrySpawnObstacle();
+	TrySpawnPickup();
 }
 
 void ATile::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp,
@@ -45,28 +50,71 @@ void ATile::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAct
 	else return;
 }
 
+void ATile::TrySpawnObstacle()
+{
+	if (UKismetMathLibrary::RandomBoolWithWeight(0.6f))
+		SpawnObstacle();
+}
+
+void ATile::TrySpawnPickup()
+{
+	if (UKismetMathLibrary::RandomBoolWithWeight(0.3f))
+	{
+		int32 NumberOfPickups = FMath::RandRange(1, MaxNumberOfPickups);
+		for (int32 i = 0; i < NumberOfPickups; i++)
+		{
+			SpawnPickup();
+		}
+	}
+}
+
 void ATile::SpawnObstacle()
 {
-	FVector BoxExtent = ObstacleSpawnArea->GetScaledBoxExtent();
-	FVector BoxOrigin = ObstacleSpawnArea->GetRelativeLocation();
+	if (Obstacles.Num() <= 0)
+		return;
 
-	FVector SpawnLocation = UKismetMathLibrary::RandomPointInBoundingBox(BoxOrigin, BoxExtent);
-	FRotator SpawnRotation = UKismetMathLibrary::RandomRotator();
+	const FVector SpawnLocation = UKismetMathLibrary::RandomPointInBoundingBox(
+		ObstacleSpawnArea->GetRelativeLocation(),
+		ObstacleSpawnArea->GetScaledBoxExtent()
+	);
 
-	UChildActorComponent* Obstacle = NewObject<UChildActorComponent>(this, UChildActorComponent::StaticClass(),
-	                                                                 FName("Obstacle"));
-	Obstacle->RegisterComponent();
-	Obstacle->AttachToComponent(ObstacleSpawnArea, FAttachmentTransformRules::KeepRelativeTransform);
-	Obstacle->SetRelativeLocation(SpawnLocation);
-	Obstacle->SetRelativeRotation(SpawnRotation);
-	int32 ObstacleIndex = FMath::RandRange(0, Obstacles.Num() - 1);
-	if (Obstacles.IsValidIndex(ObstacleIndex)
-		&& Obstacles[ObstacleIndex] != nullptr)
-	{
-		Obstacle->SetChildActorClass(Obstacles[ObstacleIndex]);
-		Obstacle->CreateChildActor();
-		UE_LOG(LogTemp,Warning,TEXT("Spawned Obstacle %d"),ObstacleIndex);
-	}
+	const int32 RandomIndex = FMath::RandRange(0, Obstacles.Num() - 1);
+	const TSubclassOf<AObstacle> RandomObstacleClass = Obstacles[RandomIndex];
+
+	if (!RandomObstacleClass)
+		return;
+
+	UChildActorComponent* ChildActorComponent = NewObject<UChildActorComponent>(this, "Obstacle");
+
+	ChildActorComponent->SetChildActorClass(RandomObstacleClass);
+	ChildActorComponent->RegisterComponent();
+	ChildActorComponent->SetRelativeTransform(UKismetMathLibrary::Conv_VectorToTransform(SpawnLocation));
+	ChildActorComponent->AttachToComponent(Root, FAttachmentTransformRules::KeepRelativeTransform);
+}
+
+
+void ATile::SpawnPickup()
+{
+	if (Pickups.Num() <= 0)
+		return;
+
+	const FVector SpawnLocation = UKismetMathLibrary::RandomPointInBoundingBox(
+		CoinSpawnArea->GetRelativeLocation(),
+		CoinSpawnArea->GetScaledBoxExtent()
+	);
+
+	const int32 RandomIndex = FMath::RandRange(0, Pickups.Num() - 1);
+	const TSubclassOf<APickup> RandomPickupClass = Pickups[RandomIndex];
+
+	if (!RandomPickupClass)
+		return;
+
+	UChildActorComponent* ChildActorComponent = NewObject<UChildActorComponent>(this, "Pickup");
+
+	ChildActorComponent->SetChildActorClass(RandomPickupClass);
+	ChildActorComponent->RegisterComponent();
+	ChildActorComponent->SetRelativeTransform(UKismetMathLibrary::Conv_VectorToTransform(SpawnLocation));
+	ChildActorComponent->AttachToComponent(Root, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called every frame

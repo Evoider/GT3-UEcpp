@@ -31,8 +31,14 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tile")
 	UBoxComponent* ObstacleSpawnArea;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Tile")
+	UBoxComponent* CoinSpawnArea;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Obstacle")
 	TArray<TSubclassOf<class AObstacle>> Obstacles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Pickup")
+	TArray<TSubclassOf<class APickup>> Pickups;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pickup")
 	int32 MaxNumberOfPickups = 5;
@@ -45,8 +51,19 @@ protected:
 	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp,class AActor* OtherActor,
 		class UPrimitiveComponent* OtherComp,int32 OtherBodyIndex,bool bFromSweep,const FHitResult& SweepResult);
 
+private:
+	UFUNCTION()
+	void TrySpawnObstacle();
+
+	UFUNCTION()
+	void TrySpawnPickup();
+	
 	UFUNCTION(BlueprintCallable,Category = "Obstacle")
 	void SpawnObstacle();
+
+	UFUNCTION()
+	void SpawnPickup();
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

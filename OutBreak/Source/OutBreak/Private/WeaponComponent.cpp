@@ -69,7 +69,7 @@ void UWeaponComponent::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Fire"));
 	FireTimer = FTimerHandle();
-	GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UWeaponComponent::SpawnProjectile, 1/FireRate, true);
+	GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UWeaponComponent::SpawnProjectile, 1/FireRate, true,0);
 	
 }
 

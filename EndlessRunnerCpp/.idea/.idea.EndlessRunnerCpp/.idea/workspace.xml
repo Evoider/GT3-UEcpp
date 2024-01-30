@@ -11,14 +11,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55026fbc-846d-4758-846f-33fdf2c187fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/.idea/.idea.OutBreak/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Actors/BP_Hero.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Controller/BP_PC_Hero.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Level/TempLevel.umap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Private/HeroController.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Public/HeroController.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Actors/BP_Pickup.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Pickup.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../OutBreak/Content/Actors/NewNiagaraSystem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.EndlessRunnerCpp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EndlessRunnerCpp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/RunCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Tile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Private/Tile.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/RunCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/Tile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EndlessRunnerCpp/Public/Tile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OutBreak/Content/Ressources/FirstPerson/Blueprints/BP_FirstPersonProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/../OutBreak/Content/Ressources/FirstPerson/Blueprints/BP_FirstPersonProjectile.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OutBreak/OutBreak.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/../OutBreak/OutBreak.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Private/WeaponComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../OutBreak/Source/OutBreak/Private/WeaponComponent.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,48 +32,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/EndlessRunnercpp/Public/Pickup.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -234,6 +196,10 @@
       <workItem from="1706455017685" duration="14774000" />
       <workItem from="1706470316841" duration="3919000" />
       <workItem from="1706540980120" duration="90000" />
+      <workItem from="1706635987041" duration="1556000" />
+      <workItem from="1706637657589" duration="103000" />
+      <workItem from="1706637842875" duration="95000" />
+      <workItem from="1706638096899" duration="3428000" />
     </task>
     <servers />
   </component>

@@ -12,17 +12,14 @@ UCLASS()
 class ENDLESSRUNNERCPP_API ARunCharacter : public ACharacter
 {
 	GENERATED_BODY()
+	
+protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* Camera;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArm;
 
-public:
-	// Sets default values for this character's properties
-	ARunCharacter();
-
-protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	bool bIsDead = false;
 	
@@ -35,12 +32,21 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	USoundBase* DeathSound;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+	int32 Coins = 0;
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	virtual void AddCoin();
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	virtual void Die();
-public:	
+	
+public:
+	// Sets default values for this character's properties
+	ARunCharacter();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

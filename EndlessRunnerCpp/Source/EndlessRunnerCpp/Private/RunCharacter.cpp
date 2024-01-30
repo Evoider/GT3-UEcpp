@@ -20,6 +20,7 @@ ARunCharacter::ARunCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	SpringArm->SetupAttachment(RootComponent);
 	SpringArm->TargetArmLength = 500.0f;
+	SpringArm->SocketOffset = FVector(0.0f, 0.0f, 100.0f);
 	SpringArm->bUsePawnControlRotation = true;
 	
 
@@ -28,6 +29,11 @@ ARunCharacter::ARunCharacter()
 
 	RunCharacterController = Cast<ARunCharacterController>(GetController());
 	
+}
+
+void ARunCharacter::AddCoin()
+{
+	Coins++;
 }
 
 // Called when the game starts or when spawned
