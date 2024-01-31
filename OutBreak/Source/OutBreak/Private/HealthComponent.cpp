@@ -19,16 +19,31 @@ void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	Health = MaxHealth;
+	bIsDead = false;
 }
 
-
-// Called every frame
-void UHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UHealthComponent::TakeDamage(int32 Damage)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	OnDamageTaken.Broadcast();
+	Health -= Damage;
+	if(Health <= 0) Die();
+	OnHealthChanged.Broadcast(Health);
 }
+
+void UHealthComponent::Die_Implementation()
+{
+	OnDeath.Broadcast();
+	bIsDead = true;
+}
+
+
+void UHealthComponent::Heal(int32 HealAmount)
+{
+	OnHeal.Broadcast();
+	Health += HealAmount;
+	if(Health > MaxHealth) Health = MaxHealth;
+	OnHealthChanged.Broadcast(Health);
+}
+
 

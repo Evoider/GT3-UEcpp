@@ -6,6 +6,16 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "WeaponComponent.generated.h"
 
+UENUM()
+enum EWeaponType : uint8
+{
+	WT_None UMETA(DisplayName = "None"),
+	WT_Pistol UMETA(DisplayName = "Pistol"),
+	WT_Rifle UMETA(DisplayName = "Rifle"),
+	WT_Shotgun UMETA(DisplayName = "Shotgun"),
+};
+
+
 class AHero;
 /**
  * 
@@ -26,6 +36,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 	FName WeaponName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	TEnumAsByte<EWeaponType> WeaponType = WT_None;
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)
@@ -62,6 +75,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
 	int32 Ammo;
 
+	int32 ShotgunAmmoPerFire = 5;
+
 	FTimerHandle FireTimer;
 	
 public:
@@ -83,6 +98,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	FName GetWeaponName() const { return WeaponName;}
+
+	UFUNCTION(BlueprintCallable, Category="Weapon")
+	EWeaponType GetWeaponType() const { return WeaponType; }
 
 	UFUNCTION(BlueprintCallable, Category="Weapon")
 	int32 GetAmmo() const { return Ammo; }

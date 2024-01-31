@@ -69,7 +69,25 @@ void UWeaponComponent::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Fire"));
 	FireTimer = FTimerHandle();
-	GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UWeaponComponent::SpawnProjectile, 1/FireRate, true,0);
+
+	switch (WeaponType)
+	{
+	case WT_None:
+		break;
+	case WT_Pistol:
+		SpawnProjectile();
+		break;
+	case WT_Rifle:
+		GetWorld()->GetTimerManager().SetTimer(FireTimer, this, &UWeaponComponent::SpawnProjectile, 1/FireRate, true,0);
+		break;
+	case WT_Shotgun:
+		for (int i = 0; i < ShotgunAmmoPerFire; i++)
+		{
+			SpawnProjectile();
+		}
+		break;
+	}
+	
 	
 }
 
@@ -106,7 +124,7 @@ void UWeaponComponent::SpawnProjectile()
 			//Set Spawn Collision Handling Override
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride =
-				ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+				ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
 			// Spawn the projectile at the muzzle
 			Projectile = World->SpawnActor<AOutBreakProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
