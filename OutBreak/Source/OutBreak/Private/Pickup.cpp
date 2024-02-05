@@ -3,40 +3,30 @@
 
 #include "Pickup.h"
 
-#include "Hero.h"
-#include "GameFramework/RotatingMovementComponent.h"
+#include "PickupComponent.h"
 
-UPickup::UPickup()
+// Sets default values
+APickup::APickup()
 {
-	RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovementComponent"));
-	SphereRadius = 32.f;
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 
-	SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	SetCollisionProfileName("NoCollision");
-	SetCollisionResponseToAllChannels(ECR_Ignore);
-	SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
-	SetGenerateOverlapEvents(true);
-	SetCanEverAffectNavigation(false);
-	CanCharacterStepUpOn = ECB_No;
+	
 	
 }
 
-void UPickup::BeginPlay()
+// Called when the game starts or when spawned
+void APickup::BeginPlay()
 {
 	Super::BeginPlay();
-	OnComponentBeginOverlap.AddDynamic(this, &UPickup::OnSphereBeginOverlap);
+	
 }
 
-void UPickup::OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+
+// Called every frame
+void APickup::Tick(float DeltaTime)
 {
-	AHero* Character = Cast<AHero>(OtherActor);
-	if(Character != nullptr)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Pickup"));
-		OnPickUp.Broadcast(Character);
-		OnComponentBeginOverlap.RemoveAll(this);
-		RotatingMovementComponent->DestroyComponent();
-		DestroyComponent();
-	}
+	Super::Tick(DeltaTime);
+
 }
+

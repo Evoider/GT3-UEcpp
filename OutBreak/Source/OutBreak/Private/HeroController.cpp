@@ -36,6 +36,7 @@ void AHeroController::Move(const FInputActionValue& Value)
 	
 	if(!Hero) Hero = Cast<AHero>(GetPawn());
 	Hero->AddMovementInput(Hero->GetActorRightVector(), MovementVector.X);
+	//Hero->AddMovementInput(Hero->GetActorForwardVector(), MovementVector.Y);
 }
 
 void AHeroController::Jump(const FInputActionValue& Value)

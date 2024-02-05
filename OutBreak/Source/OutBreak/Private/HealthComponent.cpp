@@ -21,20 +21,27 @@ void UHealthComponent::BeginPlay()
 
 	Health = MaxHealth;
 	bIsDead = false;
+
+	GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::TakeDamage);
 }
 
-void UHealthComponent::TakeDamage(int32 Damage)
+void UHealthComponent::TakeDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
+	AController* InstigatedBy, AActor* DamageCauser)
 {
 	OnDamageTaken.Broadcast();
 	Health -= Damage;
 	if(Health <= 0) Die();
 	OnHealthChanged.Broadcast(Health);
+	UE_LOG(LogTemp, Warning, TEXT("Health of %s is %d"), *GetOwner()->GetName(), Health);
 }
 
-void UHealthComponent::Die_Implementation()
+
+
+void UHealthComponent::Die()
 {
 	OnDeath.Broadcast();
 	bIsDead = true;
+	Health = 0;
 }
 
 

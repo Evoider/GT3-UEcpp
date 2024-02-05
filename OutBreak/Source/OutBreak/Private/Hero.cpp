@@ -3,10 +3,13 @@
 
 #include "Hero.h"
 
+#include "HealthComponent.h"
 #include "WeaponComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -28,17 +31,40 @@ AHero::AHero()
 	MeshFP->bCastDynamicShadow = false;
 	MeshFP->CastShadow = false;
 	MeshFP->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
+	HealthComponent->SetMaxHealth(100.f);
+	
 	
 
 	bUseControllerRotationYaw = false;
 
 }
 
+void AHero::Die()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hero Died"));
+	// Play death animation
+	
+	// Disable input
+	APlayerController* PlayerController = Cast<APlayerController>(GetController());
+	DisableInput(PlayerController);
+	// Disable collision
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// Disable movement
+	GetCharacterMovement()->DisableMovement();
+	// Disable shooting
+	StopFire();
+	// Restart level
+	UGameplayStatics::OpenLevel(this, FName(GetWorld()->GetName()));
+}
+
 // Called when the game starts or when spawned
 void AHero::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	HealthComponent->OnDeath.AddDynamic(this, &AHero::Die);
 }
 
 void AHero::AddWeapon(UWeaponComponent* NewWeaponComponent)

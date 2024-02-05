@@ -3,11 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Pickup.h"
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
 class AHero;
-class UPickup;
+class UPickupComponent;
 class UWeaponComponent;
 
 UCLASS()
@@ -21,7 +22,8 @@ protected:
 	UWeaponComponent* WeaponComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon")
-	UPickup* Pickup;
+	UPickupComponent* PickupComponent;
+	
 public:	
 	// Sets default values for this actor's properties
 	AWeapon();
@@ -32,7 +34,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-	virtual void PickupWeapon(AHero* Hero);
+	virtual void PickupWeapon(AHero* Hero) ;
 
 	UFUNCTION(BlueprintNativeEvent)
 	void EquipWeapon();

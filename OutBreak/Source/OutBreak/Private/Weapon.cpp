@@ -3,7 +3,7 @@
 
 #include "Weapon.h"
 
-#include "Pickup.h"
+#include "PickupComponent.h"
 #include "WeaponComponent.h"
 
 // Sets default values
@@ -17,8 +17,8 @@ AWeapon::AWeapon()
 	WeaponComponent->SetRelativeLocation(FVector(0.f, 0.f, 50.f));
 	
 	
-	Pickup = CreateDefaultSubobject<UPickup>(TEXT("Pickup"));
-	Pickup->SetupAttachment(WeaponComponent);
+	PickupComponent = CreateDefaultSubobject<UPickupComponent>(TEXT("Pickup"));
+	PickupComponent->SetupAttachment(WeaponComponent);
 	
 	
 }
@@ -28,7 +28,7 @@ void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Pickup->OnPickUp.AddDynamic(this, &AWeapon::PickupWeapon);
+	PickupComponent->OnPickUp.AddDynamic(this, &AWeapon::PickupWeapon);
 	WeaponComponent->OnEquip.AddDynamic(this, &AWeapon::EquipWeapon);
 	WeaponComponent->OnUnequip.AddDynamic(this, &AWeapon::UnequipWeapon);
 }

@@ -26,6 +26,12 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health")
 	bool bIsDead = false;
 
+	
+public:	
+	// Sets default values for this component's properties
+	UHealthComponent();
+
+	
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FOnDeath OnDeath;
 	UPROPERTY(BlueprintAssignable, Category = "Health")
@@ -34,19 +40,16 @@ protected:
 	FOnDamageTaken OnDamageTaken;
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FOnHeal OnHeal;
-	
-public:	
-	// Sets default values for this component's properties
-	UHealthComponent();
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
-	void TakeDamage(int32 Damage);
+	void TakeDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType,
+		class AController* InstigatedBy, AActor* DamageCauser);
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Health")
+	UFUNCTION(BlueprintCallable, Category = "Health")
 	void Die();
 
 	UFUNCTION(BlueprintCallable, Category = "Health")
@@ -54,8 +57,11 @@ protected:
 
 public:	
 	UFUNCTION(BlueprintPure, Category = "Health")
-	FORCEINLINE int32 GetHealth() const { return Health; }
+	FORCEINLINE float GetHealth() const { return Health; }
 	UFUNCTION(BlueprintPure, Category = "Health")
-	FORCEINLINE int32 GetMaxHealth() const { return MaxHealth; }
+	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	FORCEINLINE void SetMaxHealth(float Value) { MaxHealth = Value; }
+	
 		
 };

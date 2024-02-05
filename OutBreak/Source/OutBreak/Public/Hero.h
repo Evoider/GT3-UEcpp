@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Hero.generated.h"
 
+class UHealthComponent;
 class UWeaponComponent;
 class USkeletalMeshComponent;
 class UCameraComponent;
@@ -28,12 +29,17 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
 	UWeaponComponent* WeaponComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Health)
+	UHealthComponent* HealthComponent;
 	
 	/** Bool for AnimBP to switch to another animation set */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon)
 	bool bHasWeapon;
 
 protected:
+	UFUNCTION()
+	void Die();
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -56,6 +62,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	void StopFire();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void Kill();
 
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	USkeletalMeshComponent* GetMeshFP() const { return MeshFP; }
@@ -63,4 +71,6 @@ public:
 	UCameraComponent* GetCameraFP() const { return CameraFP; }
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	UWeaponComponent* GetWeaponComponent() const { return WeaponComponent; }
+	UFUNCTION(BlueprintCallable, Category = Health)
+	UHealthComponent* GetHealthComponent() const { return HealthComponent; }
 };

@@ -4,19 +4,18 @@
 #include "WeaponComponent.h"
 
 #include "Hero.h"
-#include "OutBreak/OutBreakProjectile.h"
+#include "Projectile.h"
 
 void UWeaponComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	Ammo = AmmoCapacity;
-
 }
 
 UWeaponComponent::UWeaponComponent()
 {
 	// Default offset from the character location for projectiles to spawn
-	MuzzleOffset = FVector(100.0f, 0.0f, 10.0f);
+	MuzzleOffset = FVector(150.0f, 0.0f, 10.0f);
 	AttachToSocketName = "GripPoint";
 
 	SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -108,7 +107,7 @@ void UWeaponComponent::SpawnProjectile()
 	if(Ammo > 0) Ammo--;
 	else return;
 	
-	AOutBreakProjectile* Projectile = nullptr;
+	AProjectile* Projectile = nullptr;
 
 	if (ProjectileClass != nullptr)
 	{
@@ -127,13 +126,13 @@ void UWeaponComponent::SpawnProjectile()
 				ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
 			// Spawn the projectile at the muzzle
-			Projectile = World->SpawnActor<AOutBreakProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
+			Projectile = World->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, SpawnRotation, ActorSpawnParams);
 		}
 	}
 	if(Projectile)
 	{
-		// Projectile->SetDamage(Damage);
-		// Projectile->SetRange(Range);
+		Projectile->SetDamage(Damage);
+		//Projectile->SetRange(Range);
 		Projectile->SetOwner(Hero);
 	}
 	

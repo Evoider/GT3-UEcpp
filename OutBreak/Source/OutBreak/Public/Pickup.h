@@ -3,35 +3,33 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SphereComponent.h"
+#include "GameFramework/Actor.h"
 #include "Pickup.generated.h"
 
-class URotatingMovementComponent;
 class AHero;
-/**
- * 
- */
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPickUp, AHero*, PickUpCharacter);
+class UPickupComponent;
+
 UCLASS()
-class OUTBREAK_API UPickup : public USphereComponent
+class OUTBREAK_API APickup : public AActor
 {
 	GENERATED_BODY()
-protected:
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pickup")
-	URotatingMovementComponent* RotatingMovementComponent;
 	
-public:
-	UPROPERTY(BlueprintAssignable, Category = "Interaction")
-	FOnPickUp OnPickUp;
+public:	
+	// Sets default values for this actor's properties
+	APickup();
 
-	UPickup();
-
+	
 protected:
-
+	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UFUNCTION()
-	void OnSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+
+	
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	
+	
 };
